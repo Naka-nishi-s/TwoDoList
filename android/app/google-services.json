@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "832562754432",
+    "project_id": "fir-practice-c5060",
+    "storage_bucket": "fir-practice-c5060.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832562754432:android:025bd07b2e06ee0fe10765",
+        "android_client_info": {
+          "package_name": "com.release.firebase_renkei_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832562754432-eg4hikr8k3hr0kgbcqddqt7rsnnpddgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY0SshF97D2V3ZUmZHPswWE8yG-Twyk4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832562754432-eg4hikr8k3hr0kgbcqddqt7rsnnpddgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "832562754432-d71a69ejg5ile1n7nigm1plmtn87m934.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.release.firebaseRenkeiTest"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
