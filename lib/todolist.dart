@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_renkei_test/twodolist.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,21 +38,18 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    final instance = FirebaseAuth.instance;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "Todoリスト",
           style: TextStyle(color: Color.fromARGB(230, 253, 252, 252)),
         ),
-        iconTheme: const IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
-        actions: [HumanIcon()],
+        iconTheme:
+            const IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
       ),
-      drawer: Menu(
+      drawer: const Menu(
         text: "TwoDoリスト",
         route: "/twodolist",
-        instance: instance,
       ),
       body: SafeArea(
         child: ListView.builder(

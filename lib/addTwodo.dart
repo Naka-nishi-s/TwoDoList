@@ -8,7 +8,8 @@ class AddTwodo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
+        iconTheme:
+            const IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
         title: const Text(
           'リストに追加',
           style: TextStyle(color: Color.fromARGB(230, 253, 252, 252)),

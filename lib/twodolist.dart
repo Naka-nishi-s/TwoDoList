@@ -1,7 +1,5 @@
 import 'dart:math';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TwodoList extends StatefulWidget {
@@ -13,7 +11,6 @@ class TwodoList extends StatefulWidget {
 
 class _TwodoListState extends State<TwodoList> {
   List<String> todoList = [];
-  var user;
 
   final iconList = [
     Icons.smart_toy_outlined,
@@ -42,13 +39,6 @@ class _TwodoListState extends State<TwodoList> {
   void initState() {
     super.initState();
     getPrefs();
-    getUser();
-  }
-
-  /// ユーザー取得処理
-  Future getUser() async {
-    user = FirebaseAuth.instance.currentUser;
-    setState(() {});
   }
 
   @override
@@ -57,17 +47,16 @@ class _TwodoListState extends State<TwodoList> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
+        iconTheme:
+            const IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
         title: const Text(
           "TwoDoリスト",
           style: TextStyle(color: Color.fromARGB(230, 253, 252, 252)),
         ),
-        actions: [HumanIcon()],
       ),
-      drawer: Menu(
+      drawer: const Menu(
         text: "Todoリスト",
         route: "/todolist",
-        instance: FirebaseAuth.instance,
       ),
       body: SafeArea(
         child: ListView.builder(
@@ -132,144 +121,16 @@ class _TwodoListState extends State<TwodoList> {
       ),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return StreamBuilder(
-  //     stream: FirebaseAuth.instance.authStateChanges(),
-  //     builder: ((context, snapshot) {
-  //       if (snapshot.connectionState != ConnectionState.active) {
-  //         print("Not Active");
-  //         print("Not Active");
-  //         return Center(child: CircularProgressIndicator());
-  //       } else {
-  //         print("a");
-  //         print("b");
-  //       }
-
-  //       print(snapshot);
-
-  //       if (snapshot.hasData) {
-  //         print(snapshot.data);
-  //         if (snapshot.data == null) {
-  //           print("No");
-  //           // return Home();
-  //         }
-  //         return Scaffold(
-  //           appBar: AppBar(
-  //             iconTheme:
-  //                 IconThemeData(color: Color.fromARGB(230, 253, 252, 252)),
-  //             title: Text(
-  //               "TwoDoリスト",
-  //               style: TextStyle(color: Color.fromARGB(230, 253, 252, 252)),
-  //             ),
-  //             actions: [HumanIcon()],
-  //           ),
-  //           drawer: Menu(
-  //             text: "Todoリスト",
-  //             route: "/todolist",
-  //             instance: FirebaseAuth.instance,
-  //             signOut: FirebaseAuth.instance.signOut(),
-  //           ),
-  //           body: SafeArea(
-  //             child: ListView.builder(
-  //                 itemCount: todoList.length,
-  //                 itemBuilder: (context, index) {
-  //                   return SizedBox(
-  //                     height: (deviceHeight),
-  //                     child: Card(
-  //                       shape: RoundedRectangleBorder(
-  //                           borderRadius: BorderRadius.circular(10)),
-  //                       margin: EdgeInsets.fromLTRB(14, 20, 14, 14),
-  //                       elevation: 10,
-  //                       child: Center(
-  //                         child: ListTile(
-  //                           leading: Icon(
-  //                             iconList[Random().nextInt(3)],
-  //                             size: 34,
-  //                             color: Color.fromARGB(255, 190, 222, 248),
-  //                           ),
-  //                           title: Text(
-  //                             todoList[index],
-  //                             style: TextStyle(
-  //                                 fontSize: 30,
-  //                                 color: Color.fromARGB(255, 66, 66, 61)),
-  //                           ),
-  //                           trailing: IconButton(
-  //                             icon: Icon(
-  //                               Icons.delete_forever_outlined,
-  //                               size: 36,
-  //                               color: Color.fromARGB(255, 240, 154, 148),
-  //                             ),
-  //                             onPressed: () {
-  //                               setState(() {
-  //                                 todoList.removeAt(index);
-  //                                 savePrefs();
-  //                               });
-  //                             },
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   );
-  //                 }),
-  //           ),
-  //           floatingActionButtonLocation:
-  //               FloatingActionButtonLocation.centerFloat,
-  //           floatingActionButton: FloatingActionButton(
-  //             onPressed: todoList.length >= 2
-  //                 ? null
-  //                 : (() async {
-  //                     final text =
-  //                         await Navigator.pushNamed(context, '/addTwodo');
-  //                     if (text != "" && text != null) {
-  //                       setState(() {
-  //                         todoList.add(text.toString());
-  //                         savePrefs();
-  //                       });
-  //                     }
-  //                   }),
-  //             backgroundColor: (todoList.length >= 2)
-  //                 ? Color.fromARGB(255, 163, 161, 154)
-  //                 : Theme.of(context).primaryColor,
-  //             child: Icon(Icons.add, color: Color.fromARGB(230, 253, 252, 252)),
-  //           ),
-  //         );
-  //       }
-
-  //       return Text("A");
-  //     }),
-  //   );
-  // }
-}
-
-/// マイページ遷移用の人型アイコン
-class HumanIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: (() {
-        Navigator.pushNamed(context, "/mypage");
-      }),
-      icon: Lottie.asset(
-        "assets/lottie/people.json",
-        repeat: true,
-      ),
-      iconSize: 60,
-    );
-  }
 }
 
 /// ハンバーガーメニュー
 class Menu extends StatelessWidget {
   final String text;
   final String route;
-  final instance;
 
   const Menu({
-    required this.text,
-    required this.route,
-    required this.instance,
+    required String this.text,
+    required String this.route,
   });
 
   @override
@@ -293,7 +154,8 @@ class Menu extends StatelessWidget {
               ),
             ),
             Container(
-              decoration: const BoxDecoration(border: Border(bottom: BorderSide())),
+              decoration:
+                  const BoxDecoration(border: Border(bottom: BorderSide())),
               child: ListTile(
                 leading: const Icon(Icons.done_outline),
                 title: Text(
@@ -302,21 +164,6 @@ class Menu extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.pushReplacementNamed(context, route);
-                },
-              ),
-            ),
-            Container(
-              decoration: const BoxDecoration(border: Border(bottom: BorderSide())),
-              child: ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text(
-                  'ログアウト',
-                  style: TextStyle(fontSize: 16),
-                ),
-                onTap: () {
-                  FirebaseAuth.instance.signOut();
-                  print("LogOut!");
-                  Navigator.pushReplacementNamed(context, '/');
                 },
               ),
             ),
